@@ -11,6 +11,7 @@ const PostSinglePage = async ({ params }) => {
   });
   console.log(user);
 
+ 
   return (
     <div>
       <div className="h-screen w-full flex flex-auto justify-center bg-gray-500">

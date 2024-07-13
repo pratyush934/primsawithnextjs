@@ -16,4 +16,15 @@
         --> [id] //dynamic value
             --> page.tsx
                 --> race async ({param}) 
-                --> clg(params)
+                --> clg(params) => {id : 'lskadjflksjf'}
+
+    --> post
+        --> [slug] //dynamic value // ye thoda naming imp hai nahi to bug aayega
+            --> page.tsx
+                --> race async ({param}) 
+                --> clg(params) ==> {slag: 'laskdflskadjf'}
+
+5. ek badi jabar jast baat pata chali
+    1. form me actions ke madad se ek method call kar sakte hai
+    2. aur usse se form ko link kar sakte hai.
+    3. see page.tsx and action.ts how they are linked
