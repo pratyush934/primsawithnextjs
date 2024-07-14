@@ -1,17 +1,25 @@
 import prisma from "@/lib/db";
-import Link from "next/link";
-import React from "react";
+import { unstable_cache } from "next/cache";
 
-const PostSinglePage = async ({ params }) => {
-  console.log("--->", params);
-  const user = await prisma.post.findUnique({
+const getCachedPost = unstable_cache((slug: string) => {
+  console.log(`Ye call hua hai`);
+  return prisma.post.findUnique({
     where: {
-      slug: params.slug,
+      slug,
     },
   });
-  console.log(user);
+});
 
- 
+const PostSinglePage = async ({ params }: { params: any }) => {
+  console.log("--->", params);
+  // const user = await prisma.post.findUnique({
+  //   where: {
+  //     slug: params.slug,
+  //   },
+  // });
+  const user = await getCachedPost(params.slug)
+  console.log("-----",user);
+
   return (
     <div>
       <div className="h-screen w-full flex flex-auto justify-center bg-gray-500">

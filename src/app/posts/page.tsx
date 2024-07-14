@@ -29,6 +29,9 @@ const page = async () => {
     where: {
       email: "gigagiga@gmail.com",
     },
+    include: {
+      posts: true
+    }
   });
 
   console.log(user2);
@@ -40,7 +43,7 @@ const page = async () => {
           <h1 className="text-center font-bole text-gray-950">
             All posts {postCount}
           </h1>
-          {user.map((u) => (
+          {user2?.posts.map((u) => (
             <li
               key={u.id}
               className="flex flex-row items-center justify-center pb-4"

@@ -6,16 +6,26 @@ import { revalidatePath } from "next/cache";
 //important hai bhai samjho
 
 export async function createPost(formData: FormData) {
-  await prisma.post.create({
-    data: {
-      title: formData.get("title") as string,
-      slug: (formData.get("title") as string)
-        .replace("/s+/g", "-")
-        .toLowerCase(),
-      content: formData.get("content") as string,
-    },
-  });
-  revalidatePath("/posts");
+  try {
+    await prisma.post.create({
+      data: {
+        title: formData.get("title") as string,
+        slug: (formData.get("title") as string)
+          .replace("/s+/g", "-")
+          .toLowerCase(),
+        content: formData.get("content") as string,
+        //important ishe dekhiye
+        author: {
+          connect: {
+            email: "gigagiga@gmail.com",
+          },
+        }, // Add the 'author' property here
+      },
+    });
+    revalidatePath("/posts");
+  } catch (error) {
+    console.log(`Error in action.ts createPost`, error);
+  }
 }
 
 export async function editPost(postId: string, formData: FormData) {
